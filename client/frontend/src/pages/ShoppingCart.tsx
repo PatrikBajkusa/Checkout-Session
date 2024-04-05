@@ -1,6 +1,6 @@
 export const ShoppingCart = () => {
   const handleCheckout = () => {
-    fetch("http://localhost:3000/create-checkout-session", {
+    fetch("http://localhost:3000/api/stripe/create-checkout-session", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({

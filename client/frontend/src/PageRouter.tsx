@@ -4,8 +4,8 @@ import { ShoppingCart } from "./pages/ShoppingCart";
 import { ConfirmedPayment } from "./pages/ConfirmedPayment";
 import { Container } from "react-bootstrap";
 import { Navbar } from "./components/Navbar";
-import { About } from "./pages/About";
-import { Areas } from "./pages/Areas";
+import { Login } from "./pages/About";
+import { Register } from "./pages/Register";
 
 export const PageRouter = () => {
   return (
@@ -19,8 +19,8 @@ export const PageRouter = () => {
             path="/confirmedpayment"
             element={<ConfirmedPayment />}
           ></Route>
-           <Route path="/about" element={<About />}></Route>
-           <Route path="/Areas" element={<Areas />}></Route>
+          <Route path="/login" element={<Login />}></Route>
+          <Route path="/Register" element={<Register />}></Route>
         </Routes>
       </Container>
     </>

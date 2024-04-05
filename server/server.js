@@ -1,44 +1,25 @@
 const express = require("express");
 require("dotenv").config();
-const CookieSession = require("cookie-session");
+const cookieSession = require("cookie-session");
 const cors = require("cors");
+
+const stripeRouter = require("./resources/stripe/stripe.router");
+const customerRouter = require("./resources/customers/customer.router");
+const authRouter = require("./resources/auth/auth.router");
 const app = express();
 
 app.use(cors());
 app.use(express.json());
+app.use(
+  cookieSession({
+    secret: "h3mlignyck3l",
+    maxAge: 1000 * 60 * 60,
+    
+  })
+);
 
-const stripe = require("stripe")(process.env.STRIPE_PRIVATE_KEY);
-
-const storeItems = new Map([
-  [1, { priceInCents: 10000, name: "Lets go" }],
-  [2, { priceInCents: 20000, name: "Ehyo Lets go" }],
-]);
-
-app.post("/create-checkout-session", async (req, res) => {
-  try {
-    const session = await stripe.checkout.sessions.create({
-      payment_method_types: ["card"],
-      mode: "payment",
-      line_items: req.body.items.map((item) => {
-        const storeItem = storeItems.get(item.id);
-        return {
-          price_data: {
-            currency: "sek",
-            product_data: {
-              name: storeItem.name,
-            },
-            unit_amount: storeItem.priceInCents,
-          },
-          quantity: item.quantity,
-        };
-      }),
-      success_url: `${process.env.CLIENT_URL}/confirmedpayment`,
-      cancel_url: `${process.env.CLIENT_URL}/shoppingcart`,
-    });
-    res.json({ url: session.url });
-  } catch (e) {
-    res.status(500).json({ error: e.message });
-  }
-});
+app.use("/api/stripe", stripeRouter);
+app.use("/api/customers", customerRouter);
+app.use("/api/auth", authRouter);
 
 app.listen(3000, () => console.log("Server is up n running.."));

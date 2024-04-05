@@ -10,11 +10,11 @@ export const Navbar = () => {
           <Nav.Link to="/" as={NavLink}>
             Home
           </Nav.Link>
-          <Nav.Link to="/Areas" as={NavLink}>
-            Areas
+          <Nav.Link to="/Register" as={NavLink}>
+            Register
           </Nav.Link>
-          <Nav.Link to="/About" as={NavLink}>
-            About
+          <Nav.Link to="/login" as={NavLink}>
+            Login
           </Nav.Link>
         </Nav>
         <Nav>

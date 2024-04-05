@@ -1,0 +1,18 @@
+POST http://localhost:3000/api/auth/register
+Content-Type: application/json
+
+{
+    "name": "Patrik Bajkusa",
+    "email": "patrikb99@hotmail.com",
+    "password": "12345"
+}
+###
+
+POST http://localhost:3000/api/auth/login
+Content-Type: application/json
+
+{
+    "email":"patrikb99@hotmail.com",
+    "password": "12345" 
+    
+    }
