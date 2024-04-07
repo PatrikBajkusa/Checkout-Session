@@ -1,4 +1,5 @@
 const stripe = require("stripe")(process.env.STRIPE_PRIVATE_KEY);
+
 const storeItems = new Map([
   [1, { priceInCents: 10000, name: "Lets go" }],
   [2, { priceInCents: 20000, name: "Ehyo Lets go" }],
@@ -30,4 +31,12 @@ const StripeSession = async (req, res) => {
     res.status(500).json({ error: e.message });
   }
 };
-module.exports = { StripeSession };
+
+const webHook = (req, res) => {
+  const payload = req.body;
+
+  console.log("Got payload: " + payload);
+
+  res.status(200).end();
+};
+module.exports = { StripeSession, webHook };

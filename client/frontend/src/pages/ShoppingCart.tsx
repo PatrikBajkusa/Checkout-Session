@@ -7,7 +7,7 @@ export const ShoppingCart = () => {
         items: [
           {
             id: 1,
-            quantity: 2,
+            quantity: 3,
           },
           {
             id: 2,

@@ -1,3 +1,5 @@
+
+
 import { Container, Nav, Navbar as NavbarBs } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
 
@@ -13,8 +15,9 @@ export const Navbar = () => {
           <Nav.Link to="/Register" as={NavLink}>
             Register
           </Nav.Link>
+
           <Nav.Link to="/login" as={NavLink}>
-            Login
+            Login/Logout
           </Nav.Link>
         </Nav>
         <Nav>
@@ -25,7 +28,6 @@ export const Navbar = () => {
               width: "3rem",
               height: "3rem",
               cursor: "pointer",
-              
             }}
             className="rounded-circle border text-center  "
           >

@@ -52,4 +52,15 @@ const login = async (req, res) => {
 
   res.status(200).json(customerExists.email);
 };
-module.exports = { register, login };
+const logout = (req, res) => {
+  req.session = null;
+  res.status(200).json("Succesfully logged out");
+};
+
+const authorize = (req, res) => {
+  if (!req.session.user) {
+    return res.status(401).json("You are not logged in");
+  }
+  res.status(200).json(req.session.user.email);
+};
+module.exports = { register, login, logout, authorize };

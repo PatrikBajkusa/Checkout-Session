@@ -5,4 +5,5 @@ const fetchCustomers = async () => {
   const customers = JSON.parse(data);
   return customers;
 };
+
 module.exports = fetchCustomers;
