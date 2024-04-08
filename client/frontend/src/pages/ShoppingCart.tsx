@@ -1,3 +1,5 @@
+
+
 export const ShoppingCart = () => {
   const handleCheckout = () => {
     fetch("http://localhost:3000/api/stripe/create-checkout-session", {
@@ -27,5 +29,10 @@ export const ShoppingCart = () => {
         console.error(e.error);
       });
   };
-  return <button onClick={handleCheckout}>Checkout</button>;
+  return (
+    <>
+      
+      <button onClick={handleCheckout}>Checkout</button>;
+    </>
+  );
 };

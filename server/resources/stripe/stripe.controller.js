@@ -32,11 +32,11 @@ const StripeSession = async (req, res) => {
   }
 };
 
-const webHook = (req, res) => {
-  const payload = req.body;
-
-  console.log("Got payload: " + payload);
-
-  res.status(200).end();
+const Products = async (req, res) => {
+  const products = await stripe.products.list({
+    expand: ["data.default_price"],
+  });
+  res.status(200).json(products);
 };
-module.exports = { StripeSession, webHook };
+
+module.exports = { StripeSession, Products };

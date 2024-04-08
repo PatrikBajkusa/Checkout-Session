@@ -1,10 +1,7 @@
-
-
 import { Container, Nav, Navbar as NavbarBs } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
 
 export const Navbar = () => {
-
   return (
     <NavbarBs sticky="top" className="bg-white shadow mb-3">
       <Container>
@@ -14,10 +11,6 @@ export const Navbar = () => {
           </Nav.Link>
           <Nav.Link to="/Register" as={NavLink}>
             Register
-          </Nav.Link>
-
-          <Nav.Link to="/login" as={NavLink}>
-            Login/Logout
           </Nav.Link>
         </Nav>
         <Nav>

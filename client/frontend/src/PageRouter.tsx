@@ -4,9 +4,8 @@ import { ShoppingCart } from "./pages/ShoppingCart";
 import { ConfirmedPayment } from "./pages/ConfirmedPayment";
 import { Container } from "react-bootstrap";
 import { Navbar } from "./components/Navbar";
-import { Login } from "./pages/Login";
+import { Login } from "./components/Login";
 import { Register } from "./pages/Register";
-
 
 export const PageRouter = () => {
   return (
@@ -24,8 +23,6 @@ export const PageRouter = () => {
           <Route path="/login" element={<Login />}></Route>
 
           <Route path="/Register" element={<Register />}></Route>
-          
-          
         </Routes>
       </Container>
     </>

@@ -29,16 +29,37 @@ export const Login = () => {
   };
 
   return (
-    <div>
+    <div className="d-flex  justify-content-center align-items-center">
       {!loggedIn && (
         <form
+          action=""
           onSubmit={(e: FormEvent) => {
             e.preventDefault();
           }}
         >
-          <input type="text" onChange={(e) => setUserName(e.target.value)} />
-          <input type="text" onChange={(e) => setPassword(e.target.value)} />
-          <Button onClick={fetchLogin}>Log in</Button>
+          <div className="mb-3">
+            <label htmlFor="email" className="d-block">
+              Email
+            </label>
+            <input
+              type="email"
+              placeholder="Enter email"
+              onChange={(e) => setUserName(e.target.value)}
+            />
+          </div>
+          <div className="mb-3">
+            <label htmlFor="password" className="d-block">
+              Password
+            </label>
+            <input
+              type="password"
+              placeholder="Enter password"
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </div>
+          <button className="btn btn-success" onClick={fetchLogin}>
+            Log in
+          </button>
         </form>
       )}
 

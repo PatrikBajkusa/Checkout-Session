@@ -1,1 +1,6 @@
 POST http://localhost:3000/api/stripe/webhook
+
+###
+
+
+GET http://localhost:3000/api/stripe/products

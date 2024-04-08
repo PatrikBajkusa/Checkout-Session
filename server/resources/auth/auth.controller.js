@@ -48,6 +48,7 @@ const login = async (req, res) => {
   ) {
     return res.status(400).json("Wrong email or password");
   }
+  
   req.session.customer = customerExists;
 
   res.status(200).json(customerExists.email);
