@@ -48,7 +48,7 @@ const login = async (req, res) => {
   ) {
     return res.status(400).json("Wrong email or password");
   }
-  
+
   req.session.customer = customerExists;
 
   res.status(200).json(customerExists.email);
@@ -59,7 +59,7 @@ const logout = (req, res) => {
 };
 
 const authorize = (req, res) => {
-  if (!req.session.user) {
+  if (!req.session.customer) {
     return res.status(401).json("Customer is not logged in");
   }
   res.status(200).json(req.session.user.email);

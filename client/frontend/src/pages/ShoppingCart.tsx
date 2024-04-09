@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useEffect, useState } from "react";
 interface ICartItem {
   quantity: number;
@@ -12,6 +13,7 @@ interface ICartItem {
 
 export const ShoppingCart = () => {
   const [cartItems, setCartItems] = useState<ICartItem[]>();
+
   useEffect(() => {
     const storedCartItems = localStorage.getItem("cart");
     if (storedCartItems) {
@@ -42,7 +44,7 @@ export const ShoppingCart = () => {
       <h2 style={{ textAlign: "center" }}>ShoppingCart</h2>
       <ul className="d-flex align-items-center justify-content-center">
         {cartItems?.map((item, index) => (
-          <div style={{ padding: "20px" }}>
+          <div key={index} style={{ padding: "20px" }}>
             <li key={index}>Price: {item.product.default_price.unit_amount}</li>
             <img
               src={item.product.images}

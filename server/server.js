@@ -8,15 +8,12 @@ const customerRouter = require("./resources/customers/customer.router");
 const authRouter = require("./resources/auth/auth.router");
 const app = express();
 
-app.use(cors(
-  
-));
+app.use(cors({ origin: "http://localhost:5173", credentials: true }));
 app.use(express.json());
 app.use(
   cookieSession({
     secret: "h3mlignyck3l",
     maxAge: 1000 * 60 * 60,
-    
   })
 );
 
