@@ -60,7 +60,7 @@ const logout = (req, res) => {
 
 const authorize = (req, res) => {
   if (!req.session.user) {
-    return res.status(401).json("You are not logged in");
+    return res.status(401).json("Customer is not logged in");
   }
   res.status(200).json(req.session.user.email);
 };

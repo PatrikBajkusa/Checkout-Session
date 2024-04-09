@@ -8,7 +8,9 @@ const customerRouter = require("./resources/customers/customer.router");
 const authRouter = require("./resources/auth/auth.router");
 const app = express();
 
-app.use(cors());
+app.use(cors(
+  
+));
 app.use(express.json());
 app.use(
   cookieSession({

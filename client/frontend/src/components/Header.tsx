@@ -1,7 +1,7 @@
 import { Container, Nav, Navbar as NavbarBs } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
 
-export const Navbar = () => {
+export const Header = () => {
   return (
     <NavbarBs sticky="top" className="bg-white shadow mb-3">
       <Container>

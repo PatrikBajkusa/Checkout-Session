@@ -1,14 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { BrowserRouter } from "react-router-dom";
+import { RouterProvider } from "react-router-dom";
 
 import "bootstrap/dist/css/bootstrap.min.css";
-import { PageRouter } from "./PageRouter";
+import { router } from "./Router";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <BrowserRouter>
-      <PageRouter />
-    </BrowserRouter>
+    <RouterProvider router={router}></RouterProvider>
   </React.StrictMode>
 );

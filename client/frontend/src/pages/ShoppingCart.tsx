@@ -1,21 +1,29 @@
-
+import { useEffect, useState } from "react";
+interface ICartItem {
+  quantity: number;
+  product: {
+    id: string;
+    images: string;
+    default_price: {
+      unit_amount: number;
+    };
+  };
+}
 
 export const ShoppingCart = () => {
+  const [cartItems, setCartItems] = useState<ICartItem[]>();
+  useEffect(() => {
+    const storedCartItems = localStorage.getItem("cart");
+    if (storedCartItems) {
+      setCartItems(JSON.parse(storedCartItems));
+    }
+  }, []);
   const handleCheckout = () => {
     fetch("http://localhost:3000/api/stripe/create-checkout-session", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        items: [
-          {
-            id: 1,
-            quantity: 3,
-          },
-          {
-            id: 2,
-            quantity: 1,
-          },
-        ],
+        cartItems,
       }),
     })
       .then((res) => {
@@ -31,8 +39,25 @@ export const ShoppingCart = () => {
   };
   return (
     <>
-      
-      <button onClick={handleCheckout}>Checkout</button>;
+      <h2 style={{ textAlign: "center" }}>ShoppingCart</h2>
+      <ul className="d-flex align-items-center justify-content-center">
+        {cartItems?.map((item, index) => (
+          <div style={{ padding: "20px" }}>
+            <li key={index}>Price: {item.product.default_price.unit_amount}</li>
+            <img
+              src={item.product.images}
+              className="img-fluid img-thumbnail"
+              style={{ height: "200px", width: "400px" }}
+            ></img>
+          </div>
+        ))}
+      </ul>
+      <div style={{ textAlign: "center", paddingTop: "20px" }}>
+        <button className="btn btn-success" onClick={handleCheckout}>
+          Checkout
+        </button>
+        ;
+      </div>
     </>
   );
 };
