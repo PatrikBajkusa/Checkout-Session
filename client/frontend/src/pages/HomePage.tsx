@@ -2,7 +2,7 @@ import { Button, Container } from "react-bootstrap";
 import { ProductsList } from "../components/ProductsList";
 
 import { FormEvent, useEffect, useState } from "react";
-import axios, { AxiosRequestConfig } from "axios";
+import axios from "axios";
 
 export const HomePage = () => {
   const [userName, setUserName] = useState("");
@@ -11,12 +11,9 @@ export const HomePage = () => {
 
   useEffect(() => {
     const authorize = async () => {
-      const config: AxiosRequestConfig = {
-        withCredentials: true,
-      };
       const response = await axios.get(
         "http://localhost:3000/api/auth/authorize",
-        config
+        { withCredentials: true }
       );
 
       if (response.status === 200) {

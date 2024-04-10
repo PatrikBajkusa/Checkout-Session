@@ -20,24 +20,24 @@ export const ShoppingCart = () => {
       setCartItems(JSON.parse(storedCartItems));
     }
   }, []);
-  const handleCheckout = () => {
-    fetch("http://localhost:3000/api/stripe/create-checkout-session", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        cartItems,
-      }),
-    })
-      .then((res) => {
-        if (res.ok) return res.json();
-        return res.json().then((json) => Promise.reject(json));
-      })
-      .then(({ url }) => {
+  const handleCheckout = async () => {
+    try {
+      const response = await axios.post(
+        "http://localhost:3000/api/stripe/create-checkout-session",
+        {
+          cartItems,
+        }
+      );
+
+      if (response.status === 200) {
+        const { url } = response.data;
         window.location = url;
-      })
-      .catch((e: any) => {
-        console.error(e.error);
-      });
+      } else {
+        console.error("Failed to initiate checkout:", response.data);
+      }
+    } catch (error) {
+      console.error("Error initiating checkout:", error);
+    }
   };
   return (
     <>
