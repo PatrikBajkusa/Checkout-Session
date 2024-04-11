@@ -3,6 +3,7 @@ import { HomePage } from "./pages/HomePage";
 import Layout from "./Layout";
 import { Register } from "./pages/Register";
 import { ShoppingCart } from "./pages/ShoppingCart";
+import { ConfirmedPayment } from "./pages/ConfirmedPayment";
 
 export const router = createBrowserRouter([
   {
@@ -21,6 +22,10 @@ export const router = createBrowserRouter([
       {
         path: "/shoppingcart",
         element: <ShoppingCart />,
+      },
+      {
+        path: "/confirmedpayment",
+        element: <ConfirmedPayment />,
       },
     ],
   },

@@ -13,6 +13,7 @@ interface ICartItem {
 
 export const ShoppingCart = () => {
   const [cartItems, setCartItems] = useState<ICartItem[]>();
+  const [loginMessage, setLoginMessage] = useState(false);
 
   useEffect(() => {
     const storedCartItems = localStorage.getItem("cart");
@@ -20,23 +21,38 @@ export const ShoppingCart = () => {
       setCartItems(JSON.parse(storedCartItems));
     }
   }, []);
-  const handleCheckout = async () => {
-    try {
-      const response = await axios.post(
-        "http://localhost:3000/api/stripe/create-checkout-session",
-        {
-          cartItems,
-        }
-      );
 
-      if (response.status === 200) {
-        const { url } = response.data;
-        window.location = url;
-      } else {
-        console.error("Failed to initiate checkout:", response.data);
+  const authorize = async () => {
+    const response = await axios.get(
+      "http://localhost:3000/api/auth/authorize",
+      { withCredentials: true }
+    );
+
+    if (response.status === 401) {
+      console.log(response.data);
+      setLoginMessage(true);
+    } else {
+      console.log("hello");
+      handleCheckout();
+    }
+  };
+  const handleCheckout = async () => {
+    const response = await axios.post(
+      "http://localhost:3000/api/stripe/create-checkout-session",
+      {
+        cartItems,
       }
-    } catch (error) {
-      console.error("Error initiating checkout:", error);
+    );
+
+    if (response.status === 200) {
+      const { url } = response.data;
+      localStorage.setItem(
+        "sessionId",
+        JSON.stringify(response.data.sessionId)
+      );
+      window.location = url;
+    } else {
+      console.error("Failed to initiate checkout:", response.data);
     }
   };
   return (
@@ -55,10 +71,15 @@ export const ShoppingCart = () => {
         ))}
       </ul>
       <div style={{ textAlign: "center", paddingTop: "20px" }}>
-        <button className="btn btn-success" onClick={handleCheckout}>
+        <button className="btn btn-success" onClick={authorize}>
           Checkout
         </button>
-        ;
+
+        {!loginMessage && (
+          <p style={{ color: "red" }}>
+            Du måste vara inloggad för att gå vidare
+          </p>
+        )}
       </div>
     </>
   );

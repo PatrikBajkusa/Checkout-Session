@@ -46,10 +46,16 @@ export const HomePage = () => {
     }
   };
   const fetchLogout = async () => {
-    const response = await axios.post("http://localhost:3000/api/auth/logout", {
-      withCredentials: true,
-    });
-    setLoggedIn("");
+    const response = await axios.post(
+      "http://localhost:3000/api/auth/logout",
+      {},
+      {
+        withCredentials: true,
+      }
+    );
+    if (response.status === 200) {
+      setLoggedIn("");
+    }
 
     console.log(response.data);
   };

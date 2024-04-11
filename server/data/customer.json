@@ -23,5 +23,10 @@
     "name": "asdasd",
     "email": "asda@gmail.com",
     "password": "$2b$10$vIWKMdGHarroPkLr6pRqKuDuFBxV1e4WbMkI9fdX7yx8W/2x1xKrq"
+  },
+  {
+    "name": "Dennis Träflis",
+    "email": "dennis@gmail.com",
+    "password": "$2b$10$Z3E4Qu2dnzXRLm78mp0ws.kM0Q/Wy21D6w8KZl24Ol5TumOv2Uk8m"
   }
 ]
