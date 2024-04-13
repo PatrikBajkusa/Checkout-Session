@@ -17,6 +17,6 @@ Alla godkända ordrar sparas till en json-fil,
 
 För att bygga projektet krävs följande:
 
-Bnpm install
+npm install
 För att starta servern sen använder man : npm start ( om man har nodemon installerat globalt )
 
