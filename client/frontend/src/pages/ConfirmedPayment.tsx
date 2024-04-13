@@ -23,11 +23,25 @@ export const ConfirmedPayment = () => {
         if (response.status === 200) {
           setVerified(response.data.verified);
           setIsLoading(false);
+          localStorage.clear();
         }
       };
       verifySession();
     }
   }, [verified]);
 
-  return <div>hello ConfirmedPayment</div>;
+  const toStart: () => void = () => {
+    window.location.href = "/";
+  };
+
+  return (
+    <div style={{ textAlign: "center" }}>
+      <div style={{ marginTop: "100px" }}>
+        <h3>Din betalning har gått igenom!</h3>
+      </div>
+      <button className="btn btn-success" onClick={toStart}>
+        Till start
+      </button>
+    </div>
+  );
 };

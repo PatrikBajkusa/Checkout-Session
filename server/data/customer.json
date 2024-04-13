@@ -28,5 +28,10 @@
     "name": "Dennis Träflis",
     "email": "dennis@gmail.com",
     "password": "$2b$10$Z3E4Qu2dnzXRLm78mp0ws.kM0Q/Wy21D6w8KZl24Ol5TumOv2Uk8m"
+  },
+  {
+    "name": "Erik",
+    "email": "erik@gmail.com",
+    "password": "$2b$10$CyfwUUA2/IB1P2h5S9Mh2ekH8Cq8k1YWdb.8eVKyN6H70t8bZmdCO"
   }
 ]
