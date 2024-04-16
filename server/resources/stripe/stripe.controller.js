@@ -1,11 +1,17 @@
 const stripe = require("stripe")(process.env.STRIPE_PRIVATE_KEY);
 const fs = require("fs").promises;
 
+const retrieveStripe = async (email) => {
+  const customer = await stripe.customers.list({ email: email, limit: 1 });
+  return customer.data[0].id;
+};
+
 const StripeSession = async (req, res) => {
-  const { cartItems } = req.body;
+  const cartItems = req.body.cartItems;
 
   const session = await stripe.checkout.sessions.create({
     payment_method_types: ["card"],
+    customer: JSON.parse(req.body.customerId),
     mode: "payment",
 
     line_items: cartItems.map((item) => {
@@ -14,6 +20,7 @@ const StripeSession = async (req, res) => {
         quantity: item.quantity,
       };
     }),
+
     success_url: `${process.env.CLIENT_URL}/confirmedpayment`,
     cancel_url: `${process.env.CLIENT_URL}/shoppingcart`,
   });
@@ -49,4 +56,4 @@ const Products = async (req, res) => {
   res.status(200).json(products);
 };
 
-module.exports = { StripeSession, Products, verify };
+module.exports = { StripeSession, Products, verify, retrieveStripe };

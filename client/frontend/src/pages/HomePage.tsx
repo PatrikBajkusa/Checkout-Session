@@ -37,10 +37,12 @@ export const HomePage = () => {
         withCredentials: true,
       }
     );
+
     if (response.status === 400) {
       console.log(response);
     } else {
       setLoggedIn(response.data);
+      localStorage.setItem("user", JSON.stringify(response.data.customerId));
 
       console.log(response.data);
     }

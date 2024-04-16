@@ -14,6 +14,7 @@ interface ICartItem {
 export const ShoppingCart = () => {
   const [cartItems, setCartItems] = useState<ICartItem[]>();
   const [loginMessage, setLoginMessage] = useState(false);
+  const customerId = localStorage.getItem("user");
 
   useEffect(() => {
     const storedCartItems = localStorage.getItem("cart");
@@ -36,12 +37,16 @@ export const ShoppingCart = () => {
       handleCheckout();
     }
   };
+
+  const infoToSend = {
+    customerId: customerId,
+    cartItems: cartItems,
+  };
   const handleCheckout = async () => {
     const response = await axios.post(
       "http://localhost:3000/api/stripe/create-checkout-session",
-      {
-        cartItems,
-      }
+
+      infoToSend
     );
 
     if (response.status === 200) {

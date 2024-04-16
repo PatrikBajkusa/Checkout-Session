@@ -1,6 +1,7 @@
 const fetchCustomers = require("../../utils/fetchCustomers");
 const fs = require("fs").promises;
 const bcrypt = require("bcrypt");
+const { retrieveStripe } = require("../stripe/stripe.controller");
 
 const stripe = require("stripe")(process.env.STRIPE_PRIVATE_KEY);
 
@@ -48,10 +49,12 @@ const login = async (req, res) => {
   ) {
     return res.status(400).json("Wrong email or password");
   }
+  const customerId = await retrieveStripe(email);
+  console.log(customerId);
 
   req.session.customer = customerExists;
 
-  res.status(200).json(customerExists.email);
+  res.status(200).json({ email: email, customerId: customerId });
 };
 const logout = (req, res) => {
   req.session = null;
